@@ -270,6 +270,28 @@ document.addEventListener("DOMContentLoaded", () => {
   retryBtn.addEventListener("click", loadRepos);
   loadRepos();
 
+    /* ---------- 9. Fade-in sections on scroll (Assignment 2) ---------- */
+  const fadeSections = document.querySelectorAll(".fade-in");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target); // animate only once
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    fadeSections.forEach((section) => observer.observe(section));
+  } else {
+    // Older browsers: just show everything
+    fadeSections.forEach((section) => section.classList.add("visible"));
+  }
+
   /* ---------- Footer year ---------- */
   document.getElementById("year").textContent = new Date().getFullYear();
 });

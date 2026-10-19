@@ -649,3 +649,45 @@ body.dark-theme {
   display: block;
   margin: 1rem auto 0;
 }
+\\/* ---------- 15. Animations (Assignment 2) ---------- */
+
+/* Sections fade in when they scroll into view */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animated form success message */
+.form-status.success {
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Turn animations off for users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .form-status.success {
+    animation: none;
+  }
+}
