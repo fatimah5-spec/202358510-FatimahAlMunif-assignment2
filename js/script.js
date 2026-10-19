@@ -153,6 +153,41 @@ document.addEventListener("DOMContentLoaded", () => {
   backToTop.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+    /* ---------- 7. Project filter + live search (Assignment 2) ---------- */
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const searchInput = document.getElementById("projectSearch");
+  const projectCards = document.querySelectorAll(".project-card");
+  const noResults = document.getElementById("noResults");
+  let currentFilter = "all";
+
+  const updateProjects = () => {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    projectCards.forEach((card) => {
+      const matchesFilter =
+        currentFilter === "all" || card.dataset.category === currentFilter;
+      const matchesSearch = card.textContent.toLowerCase().includes(query);
+      const show = matchesFilter && matchesSearch;
+
+      card.classList.toggle("hidden", !show);
+      if (show) visibleCount++;
+    });
+
+    // Show the empty-state message when nothing matches
+    noResults.classList.toggle("hidden", visibleCount > 0);
+  };
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      filterButtons.forEach((b) => b.classList.remove("active"));
+      button.classList.add("active");
+      currentFilter = button.dataset.filter;
+      updateProjects();
+    });
+  });
+
+  searchInput.addEventListener("input", updateProjects);
 
   /* ---------- Footer year ---------- */
   document.getElementById("year").textContent = new Date().getFullYear();
