@@ -1,0 +1,533 @@
+/* =========================================================
+   Portfolio Stylesheet
+   Structure:
+   1. CSS Variables & Reset
+   2. Base / Typography
+   3. Layout helpers
+   4. Header / Navigation
+   5. Hero
+   6. About
+   7. Projects
+   8. Skills
+   9. Contact
+   10. Footer
+   11. Dark theme
+   12. Responsive breakpoints
+   ========================================================= */
+
+/* ---------- 1. CSS Variables & Reset ---------- */
+:root {
+  --color-bg: #ffffff;
+  --color-bg-alt: #f5f7fb;
+  --color-text: #1f2430;
+  --color-text-muted: #5b6472;
+  --color-primary: #6c63ff;
+  --color-primary-dark: #574fd6;
+  --color-border: #e4e7ee;
+  --color-card-bg: #ffffff;
+  --shadow: 0 10px 25px rgba(31, 36, 48, 0.08);
+  --radius: 14px;
+  --max-width: 1100px;
+  --transition: 0.25s ease;
+}
+
+* ,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- 2. Base / Typography ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-alt {
+  background-color: var(--color-bg-alt);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  margin-top: -8px;
+  margin-bottom: 40px;
+}
+
+.center {
+  text-align: center;
+}
+
+.edit-note {
+  font-size: 0.85rem;
+  color: var(--color-primary-dark);
+  background: rgba(108, 99, 255, 0.08);
+  border: 1px dashed var(--color-primary);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+  display: inline-block;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform var(--transition), background-color var(--transition), color var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* ---------- 4. Header / Navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.logo span {
+  color: var(--color-primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition);
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-bg-alt);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* ---------- 5. Hero ---------- */
+.hero {
+  padding: 120px 0 100px;
+  text-align: center;
+  background: radial-gradient(circle at top, var(--color-bg-alt), var(--color-bg) 70%);
+}
+
+.greeting {
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin: 0 0 8px;
+}
+
+.highlight {
+  color: var(--color-primary);
+}
+
+.tagline {
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.hero-text {
+  max-width: 560px;
+  margin: 0 auto 32px;
+  color: var(--color-text-muted);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ---------- 6. About ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-image img {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- 7. Projects ---------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.project-card {
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+}
+
+.project-body {
+  padding: 20px;
+}
+
+.project-body h3 {
+  margin: 0 0 8px;
+}
+
+.project-body p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.project-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: rgba(108, 99, 255, 0.12);
+  color: var(--color-primary-dark);
+}
+
+/* ---------- 8. Skills ---------- */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.skill-pill {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-weight: 500;
+  background-color: var(--color-bg);
+}
+
+/* ---------- 9. Contact ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+}
+
+.contact-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-list a:hover {
+  color: var(--color-primary);
+}
+
+.contact-form {
+  background-color: var(--color-card-bg);
+  padding: 28px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  font-family: inherit;
+  font-size: 0.95rem;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-group.invalid input,
+.form-group.invalid textarea {
+  border-color: #e0575b;
+}
+
+.error-message {
+  color: #e0575b;
+  font-size: 0.8rem;
+  min-height: 1em;
+}
+
+.form-status {
+  margin-top: 14px;
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+.form-status.success {
+  color: #1c9c63;
+}
+
+/* ---------- 10. Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 24px 0;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.back-to-top {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* ---------- 11. Dark theme ---------- */
+body.dark-theme {
+  --color-bg: #12141c;
+  --color-bg-alt: #191c27;
+  --color-text: #edf0f7;
+  --color-text-muted: #a3aab8;
+  --color-border: #2a2e3c;
+  --color-card-bg: #1c2030;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- 12. Responsive breakpoints ---------- */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+    transform: translateY(-140%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--transition), opacity var(--transition);
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .about-image img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  .hero {
+    padding: 100px 0 70px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}

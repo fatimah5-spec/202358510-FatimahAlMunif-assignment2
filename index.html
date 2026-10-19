@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FATIMAH | Personal Portfolio</title>
+  <meta name="description" content="Personal portfolio of FATIMAH, a Computer Science student." />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="#home" class="logo">Tima<span>.</span></a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark and light theme" title="Toggle theme">
+        <!-- icon swapped between sun/moon via JS -->
+        <span id="themeIcon">🌙</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero / Home ===== -->
+    <section id="home" class="hero">
+      <div class="container hero-content">
+        <p class="greeting" id="greeting">Hello!</p>
+        <h1>I'm <span class="highlight">FATIMAH</span></h1>
+        <p class="tagline">Computer Science Student &middot; Aspiring Software Engineer</p>
+        <p class="hero-text">
+          I build clean, functional web experiences and enjoy exploring how software
+          &mdash; and AI &mdash; can solve real, everyday problems.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About Me ===== -->
+    <section id="about" class="section">
+      <div class="container about-grid">
+        <div class="about-image">
+          <img src="assets/images/avatar.svg" alt="Portrait of Tima" width="320" height="320" />
+        </div>
+        <div class="about-text">
+          <h2 class="section-title">About Me</h2>
+          <p>
+            Hi, I'm <strong>»FATIMAH</strong> 👋 a Computer Science student who loves turning ideas
+            into working software. I'm currently sharpening my skills in web development,
+            computer networks, and software engineering practices through coursework and projects.
+          </p>
+          <p>
+            When I'm not coding, I'm usually exploring how technology works, especially
+            AI ; can make everyday problems easier to solve, from safer roads to
+            smoother campus systems.
+          </p>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section id="projects" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title center">Projects</h2>
+        <p class="section-subtitle center">A few things I've been working on</p>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <img src="assets/images/project1.jpg" alt="Man using phone while driving, illustrating the distracted driving problem" loading="lazy" />
+            <div class="project-body">
+              <h3>Smart Highway Safety</h3>
+              <p>
+                A research report exploring how computer vision can detect phone use while
+                driving, aimed at reducing phone related accidents on Saudi highways.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Computer Vision</span>
+                <span class="tag">Research</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img src="assets/images/project2.jpg" alt="Laptop screen showing a schedule, representing the course registration system" loading="lazy" />
+            <div class="project-body">
+              <h3>Course Registration System</h3>
+              <p>
+                Use case diagrams and user stories modeling how students, advisors, and staff
+                interact with a university course registration platform.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Software Engineering</span>
+                <span class="tag">UML</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img src="assets/images/project3.jpg" alt="Code on a computer screen, representing this portfolio website" loading="lazy" />
+            <div class="project-body">
+              <h3>This Portfolio Website</h3>
+              <p>
+                A responsive personal portfolio built with HTML, CSS, and JavaScript,
+                featuring a dark/light theme toggle and smooth navigation.
+              </p>
+              <div class="project-tags">
+                <span class="tag">HTML/CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+            </div>
+          </article>
+       
+    </section>
+
+    <!-- ===== Skills (extra section) ===== -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title center">Skills</h2>
+        <div class="skills-grid">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Java</span>
+          <span class="skill-pill">Git &amp; GitHub</span>
+          <span class="skill-pill">Responsive Design</span>
+          <span class="skill-pill">Problem Solving</span>
+          <span class="skill-pill">AI-Assisted Development</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="section section-alt">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <h2 class="section-title">Contact</h2>
+          <p>Have a question or want to collaborate? Send me a message below.</p>
+          <ul class="contact-list">
+            <li>📧 <a href="mailto:fatimahalmunif2@gmail.com">fatimahalmunif2@gmail.com</a></li>
+            <li>🐙 <a href="https://github.com/fatimah5-spec" target="_blank" rel="noopener">github.com/fatimah5-spec</a></li>
+          </ul>
+        </div>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+            <span class="error-message" id="nameError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            <span class="error-message" id="emailError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+            <span class="error-message" id="messageError"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>&copy; <span id="year"></span> Tima. Built with HTML, CSS &amp; JavaScript.</p>
+      <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
