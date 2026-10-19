@@ -12,3 +12,6 @@ dist/
 
 # Environment variables
 .env
+conversations/
+artifacts/
+*-ai-evidence.zip

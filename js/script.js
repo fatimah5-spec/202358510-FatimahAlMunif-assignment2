@@ -25,12 +25,27 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   };
 
-  // Default to the visitor's OS preference on first load.
+    // Load the saved theme from localStorage (fall back to the OS preference).
+  let savedTheme = null;
+  try {
+    savedTheme = localStorage.getItem("theme");
+  } catch (error) {
+    // localStorage can be blocked (e.g. private mode) — just use the default.
+  }
+
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  applyTheme(prefersDark);
+  applyTheme(savedTheme ? savedTheme === "dark" : prefersDark);
 
   themeToggle.addEventListener("click", () => {
-    applyTheme(!body.classList.contains("dark-theme"));
+    const isDark = !body.classList.contains("dark-theme");
+    applyTheme(isDark);
+
+    // Save the choice so it is remembered on the next visit.
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch (error) {
+      // Ignore — the theme still changes for this visit.
+    }
   });
 
   /* ---------- 2. Mobile navigation ---------- */
