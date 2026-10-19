@@ -203,6 +203,72 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   searchInput.addEventListener("input", updateProjects);
+    /* ---------- 8. Fetch GitHub repositories (Assignment 2) ---------- */
+  const GITHUB_USERNAME = "fatimah5-spec";
+  const repoStatus = document.getElementById("repoStatus");
+  const repoList = document.getElementById("repoList");
+  const retryBtn = document.getElementById("retryBtn");
+
+  const loadRepos = async () => {
+    // Loading state
+    repoStatus.textContent = "Loading…";
+    repoStatus.classList.remove("error", "hidden");
+    retryBtn.classList.add("hidden");
+    repoList.innerHTML = "";
+
+    try {
+      const response = await fetch(
+        `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      const repos = await response.json();
+
+      // Empty state
+      if (repos.length === 0) {
+        repoStatus.textContent = "No public repositories yet.";
+        return;
+      }
+
+      repoStatus.classList.add("hidden");
+
+      repos.forEach((repo) => {
+        const card = document.createElement("article");
+        card.className = "repo-card";
+
+        const title = document.createElement("h3");
+        const link = document.createElement("a");
+        link.href = repo.html_url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = repo.name;
+        title.appendChild(link);
+
+        const description = document.createElement("p");
+        description.textContent = repo.description || "No description provided.";
+
+        const language = document.createElement("span");
+        language.className = "tag";
+        language.textContent = repo.language || "Other";
+
+        card.append(title, description, language);
+        repoList.appendChild(card);
+      });
+    } catch (error) {
+      // Error state with a way to try again
+      console.error(error);
+      repoStatus.textContent =
+        "Couldn't load repositories right now. Please check your connection and try again.";
+      repoStatus.classList.add("error");
+      retryBtn.classList.remove("hidden");
+    }
+  };
+
+  retryBtn.addEventListener("click", loadRepos);
+  loadRepos();
 
   /* ---------- Footer year ---------- */
   document.getElementById("year").textContent = new Date().getFullYear();

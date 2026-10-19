@@ -601,3 +601,51 @@ body.dark-theme {
     width: 100%;
   }
 }
+/* ---------- 14. GitHub repositories (Assignment 2) ---------- */
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.repo-card {
+  padding: 1.25rem 1.5rem;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition);
+}
+
+.repo-card:hover {
+  transform: translateY(-5px);
+}
+
+.repo-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.repo-card h3 a {
+  color: var(--color-primary);
+}
+
+.repo-card p {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+.status-message {
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.status-message.error {
+  color: #e5484d;
+}
+
+.retry-btn {
+  display: block;
+  margin: 1rem auto 0;
+}
