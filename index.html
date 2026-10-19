@@ -84,9 +84,18 @@
       <div class="container">
         <h2 class="section-title center">Projects</h2>
         <p class="section-subtitle center">A few things I've been working on</p>
+                <div class="project-controls">
+          <div class="filter-buttons" role="group" aria-label="Filter projects">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="research">Research</button>
+            <button class="filter-btn" data-filter="software">Software Eng</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+          </div>
+          <input type="search" id="projectSearch" class="search-input" placeholder="Search projects..." aria-label="Search projects" />
+        </div>
 
         <div class="projects-grid">
-          <article class="project-card">
+          <article class="project-card" data-category="research">
             <img src="assets/images/project1.jpg" alt="Man using phone while driving, illustrating the distracted driving problem" loading="lazy" />
             <div class="project-body">
               <h3>Smart Highway Safety</h3>
@@ -101,7 +110,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-category="software">
             <img src="assets/images/project2.jpg" alt="Laptop screen showing a schedule, representing the course registration system" loading="lazy" />
             <div class="project-body">
               <h3>Course Registration System</h3>
@@ -116,7 +125,7 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-category="web">
             <img src="assets/images/project3.jpg" alt="Code on a computer screen, representing this portfolio website" loading="lazy" />
             <div class="project-body">
               <h3>This Portfolio Website</h3>
@@ -129,8 +138,11 @@
                 <span class="tag">JavaScript</span>
               </div>
             </div>
-          </article>
-       
+                    </article>
+        </div>
+
+        <p id="noResults" class="empty-state hidden">No projects found. Try another word or filter.</p>
+      </div>
     </section>
 
     <!-- ===== Skills (extra section) ===== -->
