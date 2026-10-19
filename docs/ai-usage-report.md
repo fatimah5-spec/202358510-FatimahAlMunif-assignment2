@@ -1,51 +1,76 @@
-# AI Usage Report
+# AI Usage Report — Assignment 2
 
-## Tools Used & Use Cases
+## 1. Tools Used
 
-**Claude (Anthropic)** was the primary AI tool used for this assignment.
+| Tool (model) | How I used it |
+|---|---|
+| Claude (Claude Opus 5.5) by Anthropic | Understanding the requirements, choosing features, getting code for each feature fitted to my Assignment 1 files, fixing Git/GitHub setup errors, and drafting the documentation. |
 
-I used Claude for a big part of this assignment. I asked it clarify all the parts in this assignment including HTML, CSS, and
-JavaScript for me and it delivered for my the information as excellent as possible. I specifically asked it to teach me how the dark/light (day and
-night) theme system works so I could understand and apply it, and it also gave me
-extra ideas for sections beyond what I originally had in mind and I asked it to help me with photos and the icons. 
+<!-- If you used any other AI tool (Copilot, ChatGPT, ...), add a row here AND in the usage log. -->
 
-some of the prompts that i gave to claude :
-1 explain the whole assignment and requirements in polit points
-2 give some pictures to use in the projects section , point that i need them to be related to the projects 
-3 explain the light/ dark mode code for me line by line 
-4 make sure that the codes docent contain any errors in it 
+## 2. How I Used AI
 
+I used one Claude conversation (C01) for the whole assignment. I worked feature by feature:
+for each one I asked Claude where the code should go in my files, added it myself in VS Code,
+tested it in the browser, and committed it on its own branch.
 
-## Benefits & Challenges
+Main prompts I gave Claude:
+1. Explain what this assignment wants and suggest features that cover every requirement.
+2. Give me exactly what to do and where to put each piece of code, one part at a time.
+3. Help me fix Git errors when connecting my folder to the new GitHub repository.
+4. Give me the commit and push commands for each part.
+5. Write the README, technical documentation, and this report based on my site.
 
+| Part | What Claude provided | What I did |
+|---|---|---|
+| Repository setup | Steps and fixes for Git errors (wrong remote URL, an extra nested folder) | Created the repo, ran the commands, fixed the remote |
+| Project filter + search | HTML controls, CSS, and `updateProjects()` | Added categories to my 3 projects, placed the code, tested filters and search |
+| Theme in localStorage | Replacement for my Assignment 1 theme code | Replaced the code, tested that the theme stays after refresh |
+| GitHub API | Section HTML, card CSS, and `loadRepos()` | Added it with my username, tested success and the offline error state |
+| Animations | Fade-in CSS + `IntersectionObserver`, success-message animation | Added `fade-in` to my sections and tested scrolling |
+| Documentation | Drafts of README, technical docs, this report | Reviewed and edited them |
 
-**Benefits:** Claude helped me with a big part of this project and it made the whole
-process a lot easier and simpler, taught me how to apply the day/night theme
-system, gave me extra ideas for sections I hadn't thought of, and clarified things
-I had forgotten how to implement.
+Claude also read my existing files first, so it reused my CSS variables and class names, and it
+pointed out a bug from Assignment 1: the projects section was missing two closing `</div>` tags.
 
-**Challenges:** even though Claude helped me with most of the code, I had to go through it and
-understand how each part works, then replace the placeholder text and images with
-my own real content and fix a lot of things like the initial layout.
+## 3. What I Changed, Verified, and Learned
 
+<!-- ✏️ Edit this section in your own words — the rubric grades YOUR understanding. -->
+- **Changes:** chose project categories for my own projects (Research / Software Eng / Web), kept my
+  Assignment 1 design, form, and theme toggle instead of replacing them, and changed section
+  background colors so they alternate after adding the GitHub section.
+- **Verification:** after each feature I opened the site in Chrome and checked it (filter buttons,
+  searching `uml` and a word with no results, refreshing after changing the theme, turning Wi-Fi
+  off to see the API error and **Try Again**, scrolling for the fade-in), then committed it.
+- **Learned:**
+  - How `data-*` attributes and `dataset` let JavaScript filter elements.
+  - How `localStorage` saves data in the browser between visits, and why it is wrapped in `try/catch`.
+  - How `fetch` with `async/await` and `try/catch` handles loading, success, and error states.
+  - Why `textContent` is safer than `innerHTML` for data coming from an API.
+  - How `IntersectionObserver` detects when an element scrolls into view.
+  - How to use Git branches, merges, and `git remote` to fix a wrong repository URL.
 
-## Learning Outcomes
+## 4. Benefits & Challenges
 
-Working through this assignment with AI assistance helped reinforce:
-- How CSS Grid and Flexbox combine to build a responsive, multi-section layout.
-- How to structure vanilla JavaScript around `DOMContentLoaded` and keep feature code organized
-  and commented.
-- The importance of reviewing AI-generated code line by line rather than accepting it as-is,
-  especially around accessibility (`alt` text, `aria-live`, focus states) and correctness (form
-  validation logic).
+**Benefits:** Claude made it fast to see which features meet each requirement and how to fit new
+code into my existing files without breaking them. It also helped me fix Git errors quickly.
 
+**Challenges:** I had to understand where each piece goes (inside `DOMContentLoaded`, before the
+footer code), save files before committing, and fix Git setup mistakes. I made sure I understand
+each part of the code so I can explain it.
 
+## 5. Usage Log
 
-## Responsible Use & Modifications
+| ID | Tool (model) | Date | Purpose | Files affected | What you changed and how you verified it |
+|---|---|---|---|---|---|
+| C01 | Claude (Claude Opus 5.5) | 2026-10-19 | Plan features, Git setup help, step-by-step code for filter/search, localStorage theme, GitHub API, animations, and documentation drafts | index.html, css/styles.css, js/script.js, README.md, docs/technical-documentation.md, docs/ai-usage-report.md | Added each part myself, set my own project categories and GitHub username, kept my Assignment 1 design; tested every feature in Chrome (including offline error state) before each commit |
+| A01 | Claude (Claude Opus 5.5) | 2026-10-19 | Code snippets for the 4 features (raw versions saved in `artifacts/`) | index.html, css/styles.css, js/script.js | Placed and adapted them in my files, adjusted section colors, tested in the browser |
+| A02 | Claude (Claude Opus 5.5) | 2026-10-19 | Drafts of README, technical documentation, and this report (raw versions saved in `artifacts/`) | README.md, docs/technical-documentation.md, docs/ai-usage-report.md | Reviewed against my real site and edited the reflection in my own words |
 
-All AI-generated code and text in this repository was reviewed before being kept. Placeholder
-content (name, bio, project descriptions, contact links, images) is
-being replaced with my own original content and understanding before submission. I did not
-copy code from classmates or submit AI output unmodified, the structure, styling choices, and
-content were reviewed, tested in the browser, and adjusted to reflect my own understanding of how
-each piece works.
+## 6. Declaration
+
+I declare that this report and the attached evidence document all of my AI use in this assignment, with complete and unedited conversations, and that I understand and can explain all the code I submitted. I understand that undeclared AI use or a false declaration will be treated as plagiarism according to KFUPM regulations.
+
+**Name:** Fatimah Ahmed Al Munif
+**Student ID:** 202358510
+**Date:** 2026-10-19

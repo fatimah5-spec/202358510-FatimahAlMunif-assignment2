@@ -1,77 +1,116 @@
-# Technical Documentation
+# Technical Documentation — Assignment 2
 
-## Overview
+## 1. Overview
 
-This project is a static, client-side-only personal portfolio website. It has no backend,
-database, or build step — it runs directly in the browser from plain HTML, CSS, and JavaScript
-files.
+A static, client-side personal portfolio. There is no backend, database, or build step: the site runs
+directly in the browser from plain HTML, CSS, and JavaScript. The only external services are the
+GitHub REST API (for the repositories section) and Google Fonts.
 
-## Architecture
+## 2. Architecture
 
 ```
 Browser
-  ├── index.html        (structure / content)
-  ├── css/styles.css     (presentation)
-  └── js/script.js       (behavior)
+  ├── index.html       (structure / content)
+  ├── css/styles.css    (presentation, theme, animations)
+  └── js/script.js      (behavior)
+          └── fetch → https://api.github.com/users/fatimah5-spec/repos
 ```
 
-- **`index.html`** — Semantic HTML5 document split into clearly labeled sections
-  (`<header>`, `<main>` with `<section id="...">` blocks for Home/About/Projects/Skills/Contact,
-  and `<footer>`). Each interactive element has an `id` used by `script.js`, and images use
-  descriptive `alt` text for accessibility.
-- **`css/styles.css`** — Organized into numbered blocks (variables/reset, typography, layout
-  helpers, then one block per page section, followed by the dark theme override and responsive
-  breakpoints). Colors, spacing, and shadows are defined once as CSS custom properties
-  (`:root { --color-primary: ...; }`) so the whole theme can be restyled from one place.
-- **`js/script.js`** — Vanilla JavaScript, no external libraries. Wrapped in a single
-  `DOMContentLoaded` listener and split into clearly commented feature blocks.
+- **`index.html`** — Semantic HTML5: `<header>`, `<main>` with sections Home, About, Projects,
+  GitHub, Skills, Contact, and `<footer>`. Interactive elements have `id`s used by the script.
+- **`css/styles.css`** — Numbered blocks. Blocks 1–12 are from Assignment 1 (variables, layout,
+  sections, dark theme, breakpoints). Blocks 13–15 were added in Assignment 2 (filter & search,
+  GitHub cards, animations). All colors come from CSS custom properties, so new elements follow the
+  dark theme automatically.
+- **`js/script.js`** — Vanilla JavaScript inside one `DOMContentLoaded` listener, split into
+  numbered feature blocks. Blocks 7–9 are new in Assignment 2.
 
-## Key Technical Decisions
+## 3. Assignment 2 Features
 
-### Responsive Design
-- **CSS Grid** is used for multi-column layouts that need to reflow (About, Projects, Contact).
-- **Flexbox** is used for one-dimensional groupings (nav links, buttons, tags, skill pills).
-- Two breakpoints (`900px`, `640px`) collapse the grid layouts to single columns and switch the
-  navigation to a mobile toggle menu on small screens.
-- `clamp()` is used for the hero heading so font size scales smoothly between breakpoints instead
-  of jumping at fixed sizes.
+### 3.1 Project Filter + Live Search (`script.js` block 7)
+- Each project card has a `data-category` attribute (`research`, `software`, `web`).
+- Each filter button has a `data-filter` attribute. Clicking a button moves the `active` class to it
+  and stores the value in `currentFilter`.
+- The search box listens to the `input` event, so results update on every keystroke.
+- `updateProjects()` checks both conditions for every card:
+  - `matchesFilter` — the filter is `all` or equals the card's category.
+  - `matchesSearch` — the card's text (lower-case) contains the search text.
+- Cards that don't match get the `.hidden` class (`display: none`).
+- A counter tracks visible cards; when it is 0, the `#noResults` empty-state message is shown.
 
-### Theming (Dark / Light Mode)
-- Implemented with a single `dark-theme` class toggled on `<body>`, which re-declares the CSS
-  custom properties. No page reload or duplicate stylesheets are needed.
-- On first load, the site respects the visitor's OS-level preference via
-  `window.matchMedia("(prefers-color-scheme: dark)")`.
-- **Note:** the toggle state currently lives only in memory (it resets on refresh). If you want
-  it to persist between visits once deployed, store the preference in `localStorage` and read it
-  back before the first paint.
+### 3.2 Theme Saved in localStorage (`script.js` block 1)
+- `applyTheme(isDark)` toggles the `dark-theme` class on `<body>`, which overrides the CSS variables.
+- On load, the saved value `localStorage.getItem("theme")` is used. If nothing is saved, the
+  visitor's OS setting (`prefers-color-scheme`) is used instead.
+- On click, the new choice is saved with `localStorage.setItem("theme", "dark" | "light")`.
+- Both calls are wrapped in `try/catch` because `localStorage` can be blocked (e.g. some private
+  browsing modes). In that case the theme still works for the current visit.
 
-### Navigation
-- Smooth scrolling is enabled globally via `scroll-behavior: smooth` in CSS, combined with
-  anchor links (`href="#section-id"`).
-- An `IntersectionObserver`-style scroll listener (implemented with `scrollY` + `offsetTop`
-  checks for simplicity) highlights the nav link matching the section currently in view.
+### 3.3 GitHub Repositories via API (`script.js` block 8)
+- Endpoint: `GET https://api.github.com/users/fatimah5-spec/repos?sort=updated&per_page=6`
+- `loadRepos()` is an `async` function using `fetch` and `await`.
+- UI states:
 
-### Form Handling
-- The contact form has **no backend** — this satisfies the assignment requirement while keeping
-  the project deployable as a static site.
-- Validation runs entirely client-side: required-field checks, a regex email check, and a
-  minimum message length, each with inline error messages and `aria-live` status updates for
-  accessibility.
-- To wire this up to a real backend later, replace the `submit` handler's "simulate success"
-  branch with a `fetch()` call to a form endpoint (e.g. Formspree, Netlify Forms, or a custom
-  API).
+| State | What the user sees |
+|---|---|
+| Loading | "Loading…" text while the request runs |
+| Success | Up to 6 cards: repo name (link), description, language |
+| Empty | "No public repositories yet." |
+| Error | Red message asking the user to check their connection, plus a **Try Again** button |
 
-## Browser Compatibility
+- `response.ok` is checked, so HTTP errors (e.g. 403 rate limit, 404) are treated as errors too.
+- Cards are built with `document.createElement` and `textContent` (not `innerHTML`), so text from
+  the API cannot inject HTML into the page.
+- Note: the unauthenticated GitHub API allows about 60 requests per hour per IP address.
 
-Built using widely supported, standard web APIs only (CSS custom properties, Grid, Flexbox,
-`matchMedia`, standard DOM events) — no experimental features. Verified in modern Chromium-based
-browsers; recommended to also spot-check in Firefox and Safari before submission, since minor
-rendering differences (e.g. font rendering, form control styling) are common across browsers.
+### 3.4 Animations (`styles.css` block 15, `script.js` block 9)
+- **Scroll fade-in:** sections with the `.fade-in` class start with `opacity: 0` and are moved
+  down 30px. An `IntersectionObserver` adds `.visible` when 15% of a section is on screen, and then
+  stops watching it, so each section animates only once.
+- **Fallback:** if `IntersectionObserver` is not supported, all sections are shown immediately.
+- **Success message:** `.form-status.success` uses the `slideIn` keyframe animation.
+- **Hover effects:** project and repo cards lift slightly on hover; filter buttons change color.
+- **Reduced motion:** `@media (prefers-reduced-motion: reduce)` disables these animations.
 
-## Known Limitations / Future Improvements
+### 3.5 Contact Form (from Assignment 1)
+- Client-side validation for name (required), email (regex), and message (min. 10 characters).
+- Inline error messages under each field and a status message with `aria-live="polite"`.
+- No backend; a successful submission is simulated and the form is reset.
 
-- Theme preference is not persisted across page reloads (see note above).
-- The contact form does not send data anywhere yet (by design, per assignment scope).
-- Project images are placeholder SVGs and should be replaced with real screenshots.
-- No automated tests are included; manual testing was done via browser resizing and DevTools
-  device emulation.
+## 4. Error Handling & User Feedback Summary
+
+| Situation | Feedback |
+|---|---|
+| Empty or invalid form fields | Inline error under each field + "Please fix the errors above." |
+| Valid form | Animated "Thanks, {name}! Your message has been received." |
+| No project matches | "No projects found. Try another word or filter." |
+| GitHub data loading | "Loading…" |
+| GitHub request fails | Friendly error message + **Try Again** button |
+| No public repos | "No public repositories yet." |
+
+## 5. Performance
+- No JavaScript libraries or frameworks; one CSS file and one JS file.
+- Project images use `loading="lazy"`.
+- Animations only change `opacity` and `transform`, which the browser can animate cheaply.
+- The observer stops watching sections after they appear.
+- The API request is limited to 6 repositories.
+
+## 6. Browser & Device Compatibility
+- Uses standard, widely supported features: CSS custom properties, Grid, Flexbox, `fetch`,
+  `async/await`, `localStorage`, `IntersectionObserver` (with a fallback).
+- Responsive breakpoints at `900px` and `640px`; on small screens the filter buttons and search box
+  stack vertically and the search box becomes full width.
+- Tested in Chrome on macOS and in Chrome DevTools device mode (phone and tablet sizes).
+  <!-- Add any other browsers you test, e.g. Safari -->
+
+## 7. Accessibility
+- Semantic HTML landmarks and section headings.
+- Filter buttons are real `<button>` elements inside a `role="group"` with an `aria-label`.
+- The search box has an `aria-label`; the theme toggle updates its `aria-label`.
+- Form status uses `aria-live="polite"` so screen readers announce it.
+- Reduced-motion preference is respected.
+
+## 8. Known Limitations / Future Work
+- The contact form does not send messages; a service like Formspree could be connected later.
+- Projects are written directly in the HTML; they could be loaded from a JSON file.
+- The GitHub API rate limit can cause the error state if the page is reloaded many times.
