@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const repos = await response.json();
 
-      // Empty state
+     
       if (repos.length === 0) {
         repoStatus.textContent = "No public repositories yet.";
         return;
