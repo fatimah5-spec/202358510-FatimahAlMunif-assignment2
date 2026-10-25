@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       localStorage.setItem("theme", isDark ? "dark" : "light");
     } catch (error) {
-      // Ignore — the theme still changes for this visit.
+      
     }
   });
 
