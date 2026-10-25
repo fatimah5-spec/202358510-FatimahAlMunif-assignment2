@@ -15,11 +15,11 @@ for each one I asked Claude where the code should go in my files, added it mysel
 tested it in the browser, and committed it on its own branch.
 
 Main prompts I gave Claude:
-1. Explain what this assignment wants and suggest features that cover every requirement.
+1. Explain what this assignment wants.
 2. Give me exactly what to do and where to put each piece of code, one part at a time.
 3. Help me fix Git errors when connecting my folder to the new GitHub repository.
 4. Give me the commit and push commands for each part.
-5. Write the README, technical documentation, and this report based on my site.
+
 
 | Part | What Claude provided | What I did |
 |---|---|---|
