@@ -65,7 +65,7 @@ each part of the code so I can explain it.
 |---|---|---|---|---|---|
 | C01 | Claude (Claude Opus 5.5) | 2026-10-19 | Plan features, Git setup help, step-by-step code for filter/search, localStorage theme, GitHub API, animations, and documentation drafts | index.html, css/styles.css, js/script.js, README.md, docs/technical-documentation.md, docs/ai-usage-report.md | Added each part myself, set my own project categories and GitHub username, kept my Assignment 1 design; tested every feature in Chrome (including offline error state) before each commit |
 | A01 | Claude (Claude Opus 5.5) | 2026-10-19 | Code snippets for the 4 features (raw versions saved in `artifacts/`) | index.html, css/styles.css, js/script.js | Placed and adapted them in my files, adjusted section colors, tested in the browser |
-| A02 | Claude (Claude Opus 5.5) | 2026-10-19 | Drafts of README, technical documentation, and this report (raw versions saved in `artifacts/`) | README.md, docs/technical-documentation.md, docs/ai-usage-report.md | Reviewed against my real site and edited the reflection in my own words |
+
 
 ## 6. Declaration
 
